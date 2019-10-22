@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eaeff5f8-714a-4147-a266-2e98b617d2e0" name="Default Changelist" comment="">
+    <list default="true" id="eaeff5f8-714a-4147-a266-2e98b617d2e0" name="Default Changelist" comment="Create and update basic tables">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -140,7 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1571739469948</updated>
       <workItem from="1571739471277" duration="4064000" />
-      <workItem from="1571778757124" duration="3879000" />
+      <workItem from="1571778757124" duration="4165000" />
     </task>
     <task id="LOCAL-00001" summary="Create and update basic tables">
       <created>1571783443511</created>

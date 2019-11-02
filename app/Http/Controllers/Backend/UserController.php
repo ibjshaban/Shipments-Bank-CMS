@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\NewUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,8 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        echo 'create page';
+        return view('backend.user.create');
     }
 
     /**
@@ -36,9 +36,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewUserRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

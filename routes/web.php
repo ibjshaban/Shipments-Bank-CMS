@@ -19,8 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware(['auth'])->group(function (){
-   Route::get('/dashboard', 'DashboardController@index');
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', 'Backend\DashboardController@index')->name('dashboard');
+    Route::resource('user', 'Backend\UserController');
 
 
 });

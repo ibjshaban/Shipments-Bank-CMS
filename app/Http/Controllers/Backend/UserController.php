@@ -6,6 +6,7 @@ use App\Http\Requests\NewUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -38,7 +39,21 @@ class UserController extends Controller
      */
     public function store(NewUserRequest $request)
     {
-        dd($request->all());
+        if ($request->hasFile('avatar_image')) {
+            // upload 'avatar' image for the user
+            $request['avatar'] = $request->file('avatar_image')->store('avatrs');
+        } else {
+            // to set default value for 'avatar' if no image has been uploaded
+            $request['avatar'] = null;
+        }
+        // to activate the created user by default
+        $request['status'] = true;
+        // add created by details
+        $request['created_by'] = Auth::id();
+        // create and insert the new user data
+        User::create($request->all());
+        // redirect to users list with success message
+        return redirect()->route('user.index')->with('success', 'The new user is added');
     }
 
     /**

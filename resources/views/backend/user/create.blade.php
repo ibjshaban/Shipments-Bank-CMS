@@ -74,7 +74,7 @@
 
                             <div class="form-group">
                                 <label>Avatar </label>
-                                <input type="file" name="avatar" class="form-control">
+                                <input type="file" name="avatar_image" class="form-control">
                             </div>
                         </div>
 

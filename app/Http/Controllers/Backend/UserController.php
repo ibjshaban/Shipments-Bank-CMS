@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\NewUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,7 +42,7 @@ class UserController extends Controller
     {
         if ($request->hasFile('avatar_image')) {
             // upload 'avatar' image for the user
-            $request['avatar'] = $request->file('avatar_image')->store('avatrs');
+            $request['avatar'] = $request->file('avatar_image')->store('avatrs','public');
         } else {
             // to set default value for 'avatar' if no image has been uploaded
             $request['avatar'] = null;
@@ -76,7 +77,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
@@ -86,9 +88,31 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
+        // initialize a null variable for avatar
+        $avatar = null;
+        // check if the user uploaded a new avatar
+        if ($request->hasFile('avatar_image')) {
+            // upload 'avatar' image for the user
+            $avatar = $request->file('avatar_image')->store('avatrs', 'public');
+        }
         //
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->bio = $request->input('bio');
+        $user->mobile = $request->input('mobile');
+        // check if the avatar is uploded, then add it to the update fucntion
+        if (!is_null($avatar)) {
+            $user->avatar = $avatar;
+        }
+        // check if the password is updated, then add it to the update fucntion
+        if (!is_null($request->password)) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+        return back()->with('success', 'user details has been updated');
     }
 
     /**
@@ -99,6 +123,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return back()->with('success', 'user has been updated');
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class NewUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,12 @@ class NewUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|unique:users,email', // validate the new user has a none exsited email address before
-            'password' => 'required|min:4'
+            'name'=>'required',
+            'email'=> [
+                'required',
+                Rule::unique('users', 'email')->ignore($this->route('user')),
+            ],
+            'avatar_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }
 }

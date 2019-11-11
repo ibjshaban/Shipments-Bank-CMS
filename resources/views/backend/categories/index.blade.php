@@ -1,9 +1,12 @@
 @extends('backend.layout.master')
 
+@section('pageTitle','Categories')
+
+
 @section('content')
 
     <div class="section-header">
-        <h1>Users list</h1>
+        <h1>Categories list</h1>
     </div>
 
     <div class="section-body">
@@ -14,7 +17,7 @@
                         <h4>Users list</h4>
                             <div class="card-header-action">
                                 <a href="{{ route('user.create') }}" class="btn btn-icon icon-left btn-primary"><i
-                                        class="far fa-edit"></i> Add new user</a>
+                                        class="far fa-edit"></i> Add new category</a>
                             </div>
                     </div>
                     <div class="card-body">
@@ -23,40 +26,27 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
-                                @if(count($users)>0)
-                                    @foreach ($users as $user)
+                                @if(count($categories)>0)
+                                    @foreach ($categories as $category)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>
-                                                <div class="badge badge-{{ $user->status==1?'success':'danger' }}">
-                                                    {{ $user->status==1?'Active':'Inactive'}}
-                                                </div>
-                                            </td>
+                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $category->category_name }}</td>
                                             <td>
                                                 <div class="buttons">
-                                                    <a href="{{ route('user.show',$user->id)}}"
-                                                       class="btn btn-icon btn-secondary">
+                                                    <a href="{{ route('user.show',$category->id)}}" class="btn btn-icon btn-secondary">
                                                         <i class="far fa-user"></i>
                                                     </a>
-                                                    <a href="{{ route('user.edit',$user->id) }}"
-                                                       class="btn btn-icon btn-primary">
+                                                    <a href="{{ route('user.edit',$category->id) }}" class="btn btn-icon btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                    {{--<a href="{{ route('user.destroy',$user->id) }}"
-                                                       class="btn btn-icon btn-danger">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>--}}
-                                                    <form action="{{ route('user.destroy',$user->id) }}" method="post">
+                                                    <form action="{{ route('user.destroy',$category->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-times"></i></button>
                                                     </form>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -76,4 +66,5 @@
             </div>
         </div>
     </div>
+
 @endsection

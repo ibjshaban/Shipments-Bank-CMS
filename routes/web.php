@@ -23,5 +23,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', 'Backend\DashboardController@index')->name('dashboard');
     Route::resource('user', 'Backend\UserController');
 
+    Route::get('/setting', 'Backend\SettingController@index')->name('setting');
+    Route::resource('/category','Backend\CategoriesController');
+
 
 });

@@ -25,6 +25,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/setting', 'Backend\SettingController@index')->name('setting');
     Route::resource('/category','Backend\CategoriesController');
+    Route::resource('/post','Backend\PostController');
 
 
 });

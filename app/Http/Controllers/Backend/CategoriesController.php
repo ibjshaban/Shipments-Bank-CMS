@@ -89,6 +89,6 @@ class CategoriesController extends Controller
     {
         Category::find($id)->delete();
         // back() function return to the previous page
-        return back()->with('success', 'category has beed deleted');
+        return back()->with('success', 'category has been deleted');
     }
 }

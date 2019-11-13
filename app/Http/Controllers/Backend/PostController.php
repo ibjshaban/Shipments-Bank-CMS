@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -26,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.post.create');
+        $categories = Category::all();
+        return view('backend.post.create', compact('categories'));
     }
 
     /**
@@ -37,6 +40,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        $request['user_id'] = Auth::id();
         Post::create($request->all());
         return redirect()->route('post.index')->with('success', 'The new post is added');
     }
@@ -49,6 +53,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+
         $post = Post::find($id);
         return view('backend.post.show', compact('post'));
     }
@@ -61,8 +66,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
+
         $post = Post::find($id);
-        return view('backend.post.edit', compact('post'));
+        return view('backend.post.edit', compact('post', 'categories'));
     }
 
     /**
@@ -74,6 +81,13 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
+        $posts = Post::find($id);
+        $posts->title = $request->input('title');
+        $posts->content = $request->input('content');
+        $posts->category_id = $request->input('category_id');
+
+        $posts->save();
+
         return back()->with('success', 'post details has been updated');
     }
 

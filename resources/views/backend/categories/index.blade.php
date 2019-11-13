@@ -16,7 +16,7 @@
                     <div class="card-header">
                         <h4>Users list</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('user.create') }}" class="btn btn-icon icon-left btn-primary"><i
+                                <a href="{{ route('category.create') }}" class="btn btn-icon icon-left btn-primary"><i
                                         class="far fa-edit"></i> Add new category</a>
                             </div>
                     </div>
@@ -35,13 +35,13 @@
                                             <td>{{ $category->category_name }}</td>
                                             <td>
                                                 <div class="buttons">
-                                                    <a href="{{ route('user.show',$category->id)}}" class="btn btn-icon btn-secondary">
+                                                    <a href="{{ route('category.show',$category->id)}}" class="btn btn-icon btn-secondary">
                                                         <i class="far fa-user"></i>
                                                     </a>
-                                                    <a href="{{ route('user.edit',$category->id) }}" class="btn btn-icon btn-primary">
+                                                    <a href="{{ route('category.edit',$category->id) }}" class="btn btn-icon btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                    <form action="{{ route('user.destroy',$category->id) }}" method="post">
+                                                    <form action="{{ route('category.destroy',$category->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-icon btn-danger"><i class="fas fa-times"></i></button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -35,9 +36,10 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        Category::create($request->all());
+        return redirect()->route('category.index')->with('success', 'The new category is added');
     }
 
     /**
@@ -48,7 +50,8 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.categories.show', compact('category'));
     }
 
     /**
@@ -59,7 +62,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.categories.edit', compact('category'));
     }
 
     /**
@@ -69,9 +73,10 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        Category::where('id', $id)->update($request->only(['category_name']));
+        return back()->with('success', 'category details has been updated');
     }
 
     /**
@@ -82,6 +87,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::find($id)->delete();
+        // back() function return to the previous page
+        return back()->with('success', 'category has beed deleted');
     }
 }

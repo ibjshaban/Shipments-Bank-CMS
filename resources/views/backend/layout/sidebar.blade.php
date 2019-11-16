@@ -14,6 +14,8 @@
                     <li><a class="nav-link" href="{{ route('user.index') }}">Users</a></li>
                     <li><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
                     <li><a class="nav-link" href="{{ route('post.index') }}">Posts</a></li>
+                    <li><a class="nav-link" href="{{ route('tag.index') }}">Tags</a></li>
+                    <li><a class="nav-link" href="{{ route('page.index') }}">Pages</a></li>
                     <li class="active"><a class="nav-link" href="#">Settings</a></li>
                 </ul>
             </li>
